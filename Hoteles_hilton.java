@@ -1,49 +1,47 @@
 import java.util.Random;
 import java.util.Scanner;
+
 public class Hoteles_hilton {
 
     public static void main(String[] args) {
-        //Tirarmos los randoms necesarios
         Random random = new Random();
-        int horasluces = random.nextInt(24); // Me da entre 0 y 23
-        System.out.println("Estas son las horas que las luces han estado encendidas: " + horasluces);
+        int canthoteles = random.nextInt(7) + 1; // Genera un valor entre 1 y 7
 
-        int canthoteles = random.nextInt(7); // Me da entre 0 y 6
-        System.out.println("Esta es la cantidad de hoteles en la cadena " + canthoteles);
+        System.out.println("Esta es la cantidad de hoteles en la cadena: " + canthoteles);
 
-        String[] tipoLuces = {"Led", "MultiLed", "halogena"}; //Me dara el tipo de luz dependiendo el hotel
-        int indiceAleatorio = random.nextInt(tipoLuces.length);
-        String lucesseleccionadas = tipoLuces[indiceAleatorio];
-        System.out.println("Este es el tipo de luces por hotel es " + lucesseleccionadas);
+        String[] tipoLuces = {"Led", "MultiLed", "halogena"};
+        double costoTotal = 0;
 
-        int pisos = random.nextInt(15); // Me da entre 0 y 14
-        System.out.println("Este es el numero de pisos por cada hotel " + pisos);
+        for (int i = 1; i <= canthoteles; i++) {
+            int horasluces = random.nextInt(24); // Genera un valor entre 0 y 23 para las horas de las luces
+            System.out.println("Hotel " + i + ": Horas que las luces han estado encendidas: " + horasluces);
 
- //Suamamos los casos para cada tipo de luz dependiendo las horas de cada una
-double costoPorLuz = 0;
+            int pisos = random.nextInt(15) + 1; // Genera un valor entre 1 y 15 para la cantidad de pisos
+            System.out.println("Hotel " + i + ": Número de pisos: " + pisos);
 
-// Asignar el costo dependiendo del tipo de luz seleccionada
-switch (lucesseleccionadas) {
-    case "Led":
-        costoPorLuz = 0.50;
-        break;
-    case "MultiLed":
-        costoPorLuz = 1;
-        break;
-    case "halogena":
-        costoPorLuz = 0.25;
-        break;
-}
+            int indiceAleatorio = random.nextInt(tipoLuces.length);
+            String lucesseleccionadas = tipoLuces[indiceAleatorio];
+            System.out.println("Hotel " + i + ": Tipo de luces: " + lucesseleccionadas);
 
-// Calcular el costo total considerando que cada piso tiene una luz
-double costoTotal = canthoteles * pisos * costoPorLuz;
+            double costoPorLuz = 0;
 
-System.out.println("El costo total de las luces para todos los hoteles es: $" + costoTotal);
+            switch (lucesseleccionadas) {
+                case "Led":
+                    costoPorLuz = 0.50;
+                    break;
+                case "MultiLed":
+                    costoPorLuz = 1;
+                    break;
+                case "halogena":
+                    costoPorLuz = 0.25;
+                    break;
+            }
 
+            double costoHotel = horasluces * pisos * costoPorLuz;
+            costoTotal += costoHotel;
+            System.out.println("Hotel " + i + ": Costo de las luces: $" + costoHotel);
+        }
 
-
+        System.out.println("El costo total de las luces para todos los hoteles es: $" + costoTotal);
     }
-
-    
-
 }
